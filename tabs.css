@@ -1,0 +1,28 @@
+.open {
+    display: block !important;
+}
+.ft-tabs-container {
+    max-width: 600px;
+    position: relative;
+    margin: auto;
+    padding-top: 90px;
+}
+.tablist {
+    padding: 0px;
+}
+.tab {
+    list-style-type: none;
+    display: inline-block;
+    padding: 5px 10px;
+}
+.tab.active {
+	background-color: #ccc;
+	color: white;
+}
+.hidden {
+	display: none !important;
+}
+.panel {
+	border: 1px solid black;
+    display: none;
+}

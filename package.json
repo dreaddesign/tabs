@@ -1,0 +1,26 @@
+{
+	"name": "tabs",
+	"version": "1.0.0",
+	"description": "",
+	"main": "tabs.js",
+	"scripts": {
+		"test": "test",
+		"babel": "babel --presets env --out-dir dist --watch *.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"gulp": "*",
+		"gulp-concat": "*",
+		"gulp-sass": "*",
+		"gulp-uglify": "*",
+		"gulp-uglifycss": "*",
+		"gulp-watch-sass": "*",
+		"mocha": "^4.1.0",
+		"chai": "^4.1.2",
+		"sinon": "^4.1.4",
+		"babel-cli": "^6.0.0",
+		"babel-preset-env": "*",
+		"gulp-autoprefixer": "^4.1.0"
+	}
+}

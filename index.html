@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>Modal Example</title>
+		<link rel="stylesheet" href="tabs.css">
+	</head>
+	<body>
+	<div id="tabsContainer" class="ft-tabs-container">
+		<ul id="tablist" class="tablist" role="tablist">
+			<li id="tab1" class="tab" aria-controls="panel1" role="tab" aria-selected="true" tabindex="0">Prices</li>
+			<li id="tab2" class="tab" aria-controls="panel2" role="tab" aria-selected="false" tabindex="0">Features</li>
+		</ul>
+		<div id="panel1" class="panel" aria-labelledby="tab1" role="tabpanel" aria-hidden="false">
+			<h3 tabindex="0">Prices</h3>
+			<p>List of prices</p>
+		</div>
+		<div id="panel2" class="panel" aria-labelledby="tab2" role="tabpanel" aria-hidden="true">
+			<h3 tabindex="0">Features</h3>
+			<p>List of product features....</p>
+		</div>
+	</div>
+	<div id="tabsContainer2" class="ft-tabs-container">
+		<ul id="tablist" class="tablist" role="tablist">
+			<li id="tab12" class="tab" aria-controls="panel12" role="tab" aria-selected="true" tabindex="0">Prices</li>
+			<li id="tab22" class="tab" aria-controls="panel22" role="tab" aria-selected="false" tabindex="0">Features</li>
+		</ul>
+		<div id="panel12" class="panel" aria-labelledby="tab12" role="tabpanel" aria-hidden="false">
+			<h3 tabindex="0">Prices</h3>
+			<p>List of prices</p>
+		</div>
+		<div id="panel22" class="panel" aria-labelledby="tab22" role="tabpanel" aria-hidden="true">
+			<h3 tabindex="0">Features</h3>
+			<p>List of product features....</p>
+		</div>
+	</div>
+	<script src="dist/tabs.js" type="text/javascript" charset="utf-8" async defer></script>
+	</body>
+</html>
