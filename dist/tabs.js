@@ -4,82 +4,59 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 // Create an immediately invoked functional expression to wrap our code
 (function () {
-
 	// Define our constructor
-	window.FTTabs = function () {
-
+	window.FTTabs = function (container) {
 		// Create global element references
-		//this.activeTab = null;
+		this.container = container;
+		this.tabs;
+		this.panels;
 		// Define option defaults
 		var defaults = {
-			label: ['test1', 'test2'],
-			content: ['this is the content for test1', 'this is the content for test2'],
-			activetab: 'test1',
+			/*	  tabs: Array.from(this.container.children[0].children),
+   	  panels: Array.from(this.children),
+   	  activetab: tabs[0],*/
 			side: 'top',
 			accordian: false
-		};
-
-		// Create options by extending defaults with the passed in arugments
-		if (arguments[0] && _typeof(arguments[0]) === "object") {
+			//console.log(this);
+			// Create options by extending defaults with the passed in arugments
+		};if (arguments[0] && _typeof(arguments[0]) === "object") {
 			this.options = extendDefaults(defaults, arguments[0]);
 		}
 	};
 
-	// Public Methods
-	FTTabs.prototype.activeTab = function () {
+	FTTabs.prototype.init = function (container) {
 		var _ = this,
-		    i,
-		    contentContainer,
-		    tabs = document.getElementsByClassName('tab'),
-		    panels = document.getElementsByClassName('panel'),
-		    active = ' active';
+		    container = this.container,
+		    tabs = Array.from(container.children[0].children),
+		    panels = Array.from(container.children);
+		panels.shift();
 
-		buildOut.call(this);
-		initializeEvents.call(this);
-		// Declare all variables
-		for (i = tabs.length - 1; i >= 0; i--) {
-			tabs[i].addEventListener("click", function () {
-				var panelId = this.getAttribute('aria-controls');
-				var currentPanel = document.getElementById(panelId);
-				//es6
-				//[ ...n.parentNode.children ].filter(c => c.nodeType == 1 && c != n)
-				//add active class
-				//loop through all tabs and remove active class
-				this.parentNode.childNodes.forEach(function (tab) {
-					tab.classList ? tab.classList.remove('active') : '';
-				});
-				for (i = panels.length - 1; i >= 0; i--) {
-					panels[i].classList ? panels[i].classList.remove('open') : '';
-				}
-				//add active class to the element that was just clicked
-				this.classList.toggle('active');
-				currentPanel.classList.toggle('open');
-			}, false);
-		}
-		tabs[0].className = " tab active";
-		panels[0].className = " panel open";
-	};
+		tabs[0].classList.toggle('active');
+		panels[0].classList.toggle('open');
 
-	FTTabs.prototype.alert = function () {
-		var _ = this;
-		buildOut.call(this);
-		initializeEvents.call(this);
-		console.log('alert method fired');
+		initializeEvents.call(this, tabs, 'active');
 	};
 
 	// Private Methods
-	function buildOut() {
+	function initializeEvents(elementGroup, className) {
+		for (var i = elementGroup.length - 1; i >= 0; i--) {
+			elementGroup[i].addEventListener("click", function () {
+				var panelId = this.getAttribute('aria-controls'),
+				    activePanel = document.getElementById(panelId),
+				    tabs = Array.from(this.parentNode.children),
+				    panels = Array.from(activePanel.parentNode.children);
+				panels.shift();
 
-		var label, content, contentContainer;
-		/*
-  * If content is an HTML string, append the HTML string.
-  * If content is a domNode, append its content.
-  */
+				tabs.forEach(function (element) {
+					element.classList.remove(className);
+				});
+				panels.forEach(function (element) {
+					element.classList.remove('open');
+				});
 
-		if (typeof this.options.content === "string") {
-			content = this.options.content;
-		} else {
-			content = this.options.content.innerHTML;
+				this.classList.toggle(className);
+				activePanel.classList.toggle('open');
+			}, false);
 		}
 	}
 
@@ -92,21 +69,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		}
 		return source;
 	}
-
-	function initializeEvents() {}
 })();
 
 var tabsContainer = document.getElementById('tabsContainer');
-var panel1 = document.getElementById('panel1');
-var panel2 = document.getElementById('panel2');
-
-var FTTabs = new FTTabs({
-	label: ['Parts', 'Sales'],
-	content: [panel1, panel2]
-});
+var tabs1 = new FTTabs(tabsContainer).init();
 
 var tabsContainer2 = document.getElementById('tabsContainer2');
-var panel12 = document.getElementById('panel12');
-var panel22 = document.getElementById('panel22');
-
-FTTabs.activeTab();
+var tabs2 = new FTTabs(tabsContainer2).init();
